@@ -5,22 +5,25 @@ const {randomBytes} =  require('crypto')
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 const comments = {}
-app.get('/getCommnetByPostId/:id',(req,res)=>{
-    res.send(posts);
+app.get('/getCommnetByPostId/:postId',(req,res)=>{
+    res.send(comments[req.params.postId] || []);
 })
 
 
-app.post('/storePost',(req,res)=>{
+app.post('/storeComment',(req,res)=>{
    
-    const id  = randomBytes(4).toString('hex');
-    const {title}=req.body;
-    posts[id]={
-        id,
-        title
-    }
-    res.status(201).send(posts[id])
+    const commentId  = randomBytes(4).toString('hex');
+    const postId =  req.body.postId;
+    const comment =  req.body.comment;
+const commentData = comments[postId] || [];
+    commentData.push({
+       id :  commentId,
+       content :   comment
+    })
+    comments[postId] = commentData;
+    res.status(201).send( comments)
 })
 
-app.listen(4000,()=>{
-    console.log("listening at port 4000");
+app.listen(4200,()=>{
+    console.log("listening at port 4200");
 })
