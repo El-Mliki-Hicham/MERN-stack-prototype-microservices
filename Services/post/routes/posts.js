@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var postModel = require('../models/posts.model')
-// const cors = require('cors');
+const cors = require('cors');
 const {randomBytes} =  require('crypto');
 const { post } = require('.');
+router.use(cors({
+  origin: 'http://localhost:3000' // Allow requests from this origin
+}));
+
 /* GET users listing. */
 router.get('/getAllPosts', function(req, res, next) {
   postModel.find()

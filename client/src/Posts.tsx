@@ -14,7 +14,7 @@ export default function PostData(){
     useEffect(() => {
     
         const  fetchPosts = async () =>{
-            const response = await fetch(`${BASE_URL}/getPosts`);
+            const response = await fetch(`${BASE_URL}/posts/getAllPosts`);
             const postsFetch = await response.json();
             console.log(postsFetch);
             setPosts(postsFetch)
