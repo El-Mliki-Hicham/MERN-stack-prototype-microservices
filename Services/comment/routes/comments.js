@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const {randomBytes} =  require('crypto');
 var commentModel = require('../models/comment.model')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -7,7 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getCommnetByPostId/:postId',(req,res)=>{
-  var query = { postId: res.params.postId };
+  // res.send(res.params)
+  var query = { postId: req.params.postId };
   commentModel.find(query)
   .then((comments)=>{
     res.send({status:200 , data:comments})

@@ -1,11 +1,7 @@
 import { log } from "console";
 import React, { useEffect, useState } from "react";
+import { Post } from "./interfaces/post"
 
-interface Post{
-    _id :number
-    postId:String
-    title : string,
-};
 
 const BASE_URL  = "http://localhost:4000"
 export default function PostData(){
